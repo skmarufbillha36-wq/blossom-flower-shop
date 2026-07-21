@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "esbuild src/server.ts --bundle --platform=node --target=node20 --outfile=dist/server.js --external:@prisma/client --external:bcryptjs --external:cloudinary",
+    "build": "npm run db:generate && esbuild src/server.ts --bundle --platform=node --target=node20 --outfile=dist/server.js --external:@prisma/client --external:bcryptjs --external:cloudinary",
     "start": "node dist/server.js",
+    "db:generate": "cd ../../packages/database && npx prisma generate",
+    "db:migrate": "cd ../../packages/database && npx prisma migrate deploy",
+    "db:seed": "cd ../../packages/database && npx ts-node src/seed.ts",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
