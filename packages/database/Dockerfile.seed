@@ -1,0 +1,26 @@
+# Lightweight image just for running the DB seed
+FROM node:20-alpine
+WORKDIR /app
+
+# libc6-compat for compatibility + openssl for Prisma engine
+RUN apk add --no-cache libc6-compat openssl
+
+# Copy monorepo manifests
+COPY package.json package-lock.json* ./
+COPY packages/types/package.json       ./packages/types/
+COPY packages/database/package.json    ./packages/database/
+
+# Install only database package dependencies (includes ts-node, prisma)
+RUN npm install --legacy-peer-deps
+
+# Copy source files needed for seeding
+COPY packages/types    ./packages/types
+COPY packages/database ./packages/database
+
+# Generate Prisma client (with linux-musl-openssl-3.0.x target in schema)
+RUN npx prisma generate --schema=./packages/database/prisma/schema.prisma
+
+# Force Prisma to use the OpenSSL 3.x engine binary on Alpine
+ENV PRISMA_QUERY_ENGINE_LIBRARY=/app/node_modules/.prisma/client/libquery_engine-linux-musl-openssl-3.0.x.so.node
+
+CMD ["npx", "ts-node", "--project", "packages/database/tsconfig.json", "packages/database/src/seed.ts"]
