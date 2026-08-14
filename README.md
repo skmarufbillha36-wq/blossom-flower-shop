@@ -2,43 +2,6 @@
 
 Full-stack flower shop e-commerce — Next.js 14, Express.js, PostgreSQL, Docker, Cloudinary CDN.
 
-## 🚀 Deployment Guide
-
-### Frontend → Vercel
-
-1. Go to [vercel.com](https://vercel.com) → **Add New Project**
-2. Import `blossom-flower-shop` repo
-3. Set **Root Directory** → `apps/web`
-4. Add Environment Variable:
-   - `NEXT_PUBLIC_API_URL` = your Railway API URL (e.g. `https://your-api.railway.app`)
-5. Click **Deploy**
-
----
-
-### Backend + Database → Railway
-
-1. Go to [railway.app](https://railway.app) → **New Project**
-2. Click **+ New** → **Database** → **PostgreSQL** (creates DB automatically)
-3. Click **+ New** → **GitHub Repo** → select `blossom-flower-shop`
-4. Set **Root Directory** → `apps/api`
-5. Add Environment Variables:
-
-```
-DATABASE_URL          = (auto-provided by Railway PostgreSQL)
-JWT_SECRET            = any-long-random-secret-string
-CLOUDINARY_CLOUD_NAME = iedhaa6l
-CLOUDINARY_API_KEY    = 611616153163134
-CLOUDINARY_API_SECRET = t2RoGG0UnpD_7dLwDQxvn94G1UE
-PORT                  = 5000
-NODE_ENV              = production
-```
-
-6. After deploy, run migrations via Railway **Shell**:
-```bash
-npm run db:migrate
-npm run db:seed
-```
-
 ---
 
 ## 💻 Local Development
@@ -56,7 +19,7 @@ docker compose up -d
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | admin@flowershop.com | admin123456 |
+| Admin | admin@blossomflowers.com | Blossom@Admin2026 |
 | Customer | customer@example.com | customer123 |
 
 ---
@@ -70,7 +33,6 @@ docker compose up -d
 | Database | PostgreSQL 15 |
 | Images | Cloudinary CDN |
 | DevOps | Docker, Docker Compose |
-| Deployment | Vercel (web) + Railway (api + db) |
 
 ---
 
@@ -79,8 +41,8 @@ docker compose up -d
 ```
 flower-shop/
 ├── apps/
-│   ├── web/          ← Next.js frontend (Vercel)
-│   └── api/          ← Express.js backend (Railway)
+│   ├── web/          ← Next.js frontend
+│   └── api/          ← Express.js backend
 ├── packages/
 │   ├── types/        ← Shared TypeScript types
 │   └── database/     ← Prisma schema + seed

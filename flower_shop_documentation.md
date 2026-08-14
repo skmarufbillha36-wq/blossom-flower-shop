@@ -1,4 +1,4 @@
-﻿# Flower Shop Website — Project Documentation
+# Flower Shop Website — Project Documentation
 
 **Student:** Abdelkarem Ahmed
 **Course:** GitHub & Vibe Coding Training — Work Experience
@@ -22,8 +22,8 @@
 10. Image Storage — Cloudinary CDN
 11. Containerization — Docker
 12. Security Measures
-13. Deployment Strategy
-14. Challenges & Solutions
+13. Challenges & Solutions
+14. Admin Credentials
 
 ---
 
@@ -33,7 +33,7 @@
 
 The objective of this project is to design and develop a fully functional, production-ready e-commerce website for a flower shop. The website aims to provide real business value — not just serve as a course assignment — by enabling a real flower shop to showcase its products, receive online orders, and manage its operations efficiently.
 
-The end goal is to deliver a professional-grade product that can be presented to an actual flower shop business, deployed to a live environment, and potentially sold as a commercial solution.
+The end goal is to deliver a professional-grade product that can be presented to an actual flower shop business and serve as a complete, working demonstration of modern full-stack web development.
 
 ### Core Features Implemented
 
@@ -120,7 +120,6 @@ flower-shop/
 | PostgreSQL 15 | Primary relational database |
 | Docker + Docker Compose | Containerization and orchestration |
 | Cloudinary CDN | Persistent cloud image storage |
-| Vercel | Frontend deployment |
 
 ---
 
@@ -384,7 +383,7 @@ Consistent cards with max-width 220px:
 
 Local storage at `/app/uploads` causes two failures:
 1. Docker container rebuilds permanently delete all uploaded files
-2. Images are not accessible across different servers (e.g., Vercel + Railway)
+2. Images are not accessible across different servers in a distributed environment
 
 ### Solution
 
@@ -456,29 +455,7 @@ NEXT_PUBLIC_API_URL   ← Backend URL for frontend
 
 ---
 
-## 13. Deployment Strategy
-
-### Local Development
-
-```
-docker compose up -d
-Web:  http://localhost:3000
-API:  http://localhost:5000
-DB:   localhost:5432
-```
-
-### Production
-
-| Component | Platform | Reason |
-|---|---|---|
-| Frontend (Next.js) | Vercel | Built by Next.js creators, zero-config, free tier |
-| Backend (API) | Railway / Render | Supports Node.js + Docker |
-| Database | Neon / Supabase | Managed PostgreSQL with free tier |
-| Images | Cloudinary | Already integrated, globally distributed CDN |
-
----
-
-## 14. Challenges & Solutions
+## 13. Challenges & Solutions
 
 ### Challenge 1: Images Disappearing After Rebuild
 
@@ -512,15 +489,28 @@ postgresql://postgres:password@db:5432/flower_shop
 
 ## Conclusion
 
-This project demonstrates the complete lifecycle of a modern web application — from architectural planning and technology selection through implementation, containerization, cloud integration, and deployment.
+This project demonstrates the complete lifecycle of a modern web application — from architectural planning and technology selection through implementation, containerization, and cloud integration.
 
-The flower shop website is production-ready with:
+The flower shop website is fully functional with:
 - A secure, scalable REST API with role-based access control
 - A professionally designed, SEO-optimized Next.js frontend
 - A cloud-native image pipeline via Cloudinary CDN
-- A fully containerized, reproducible deployment environment via Docker
+- A fully containerized, reproducible environment via Docker
 
-Every technology choice was driven by a concrete, justified business need. The result is a system that a real flower shop could adopt today.
+Every technology choice was driven by a concrete, justified business need.
+
+---
+
+## 14. Admin Credentials
+
+The following credentials are used to access the admin dashboard at `/admin`:
+
+| Field | Value |
+|---|---|
+| **Email** | admin@blossomflowers.com |
+| **Password** | Blossom@Admin2026 |
+
+> **Note:** The admin account is seeded automatically when the database is initialized via `prisma db seed`.
 
 ---
 
